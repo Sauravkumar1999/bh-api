@@ -1,0 +1,52 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "container",
+            "image": "img",
+            "cpu": 0,
+            "memoryReservation": 0,
+            "links": [],
+            "portMappings": [
+                {
+                    "containerPort": 8000,
+                    "hostPort": 8000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/aws/businesshub-api-ecs-env",
+                    "awslogs-region": "ap-northeast-2",
+                    "awslogs-stream-prefix": "businesshub-api-ecs-env",
+                    "mode": "non-blocking"
+                }
+            },
+            "healthCheck": {
+                "command": [
+                    "CMD-SHELL",
+                    "curl -f http://localhost:8000/health || exit 1"
+                ],
+                "interval": 30,
+                "timeout": 5,
+                "retries": 3
+            }
+        }
+    ],
+    "family": "value",
+    "taskRoleArn": "value",
+    "executionRoleArn": "value",
+    "networkMode": "awsvpc",
+    "volumes": [],
+    "placementConstraints": [],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "0",
+    "memory": "0",
+    "tags": []
+}
